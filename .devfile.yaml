@@ -61,7 +61,7 @@ commands:
       component: tools
       workingDir: ${PROJECT_SOURCE}
       commandLine: |
-        IMAGE=image-registry.openshift-image-registry.svc:5000/openshift/quarkus-api-example
+        IMAGE=image-registry.openshift-image-registry.svc:5000/mloriedo-dev/quarkus-api-example
         podman build -f src/main/docker/Dockerfile.jvm -t "${IMAGE}" .
       group:
         kind: build
