@@ -103,6 +103,14 @@ commands:
         oc delete pod inventory-quarkus
       group:
         kind: build
+  - id: javaversion
+    exec:
+      label: "8. Java version"
+      component: tools
+      commandLine: |
+        java -version
+      group:
+        kind: run
 events:
   postStart:
     - package
