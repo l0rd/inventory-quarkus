@@ -108,7 +108,7 @@ commands:
       label: "8. Java version"
       component: tools
       commandLine: |
-        java -version
+        source /home/user/.bashrc && java -version
       group:
         kind: run
 events:
