@@ -116,4 +116,13 @@ commands:
         oc delete pod inventory-quarkus
       group:
         kind: build
+  - id: tcpdump
+    exec:
+      label: "8. Run tcp dump"
+      component: tcpdump
+      commandLine: |
+        tcpdump -s 0 -n -w /tmp/kieserver.pcap
+      group:
+        kind: run
+
 
