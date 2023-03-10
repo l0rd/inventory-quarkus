@@ -27,7 +27,7 @@ components:
       memoryRequest: 5Mi
       memoryLimit: 6G
       cpuRequest: 1000m
-      cpuLimit: 4000m
+      cpuLimit: 3000m
   - name: tcpdump
     container:
       image: corfr/tcpdump
