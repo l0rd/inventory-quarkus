@@ -26,8 +26,8 @@ components:
           path: /api/inventory/100000
       memoryRequest: 2Mi
       memoryLimit: 4G
-      cpuRequest: 1000m
-      cpuLimit: 3000m
+      cpuRequest: 500m
+      cpuLimit: 2000m
   - name: tcpdump
     container:
       image: corfr/tcpdump
