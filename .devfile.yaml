@@ -28,6 +28,12 @@ components:
       memoryLimit: 6G
       cpuRequest: 1000m
       cpuLimit: 4000m
+  - name: tcpdump
+    container:
+      image: corfr/tcpdump
+      command:
+        - /bin/sleep
+        - infinity
 commands:
   - id: package
     exec:
