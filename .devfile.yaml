@@ -3,7 +3,16 @@ metadata:
   name: inventory-quarkus
 attributes:
   controller.devfile.io/storage-type: ephemeral
-  pod-overrides: {"spec":{"securityContext":{"capabilities":{"add":['SETGID','SETUID','NET_ADMIN','NET_RAW']}}}}
+  pod-overrides:
+    metadata:
+      labels:
+        my-label: my value
+    spec:
+      securityContext:
+        capabilities:
+          add:
+            - NET_ADMIN
+            - NET_RAW
 components:
   - name: tools
     container:
