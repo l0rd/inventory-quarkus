@@ -3,16 +3,6 @@ metadata:
   name: inventory-quarkus
 attributes:
   controller.devfile.io/storage-type: ephemeral
-  pod-overrides:
-    metadata:
-      labels:
-        my-label: my-value
-    spec:
-      securityContext:
-        capabilities:
-          add:
-            - NET_ADMIN
-            - NET_RAW
 components:
   - name: tools
     container:
@@ -39,7 +29,7 @@ components:
       cpuRequest: 500m
       cpuLimit: 2000m
   - name: tcpdump
-    attribute:
+    attributes:
       container-overrides:
         securityContext:
           capabilities:
