@@ -109,6 +109,4 @@ commands:
         oc delete pod inventory-quarkus
       group:
         kind: build
-events:
-  postStart:
-    - package
+
