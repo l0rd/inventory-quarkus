@@ -39,6 +39,13 @@ components:
       cpuRequest: 500m
       cpuLimit: 2000m
   - name: tcpdump
+    attribute:
+      container-overrides:
+        securityContext:
+          capabilities:
+            add:
+              - NET_ADMIN
+              - NET_RAW
     container:
       image: corfr/tcpdump
       command:
