@@ -121,7 +121,7 @@ commands:
       label: "8. Run tcp dump"
       component: tcpdump
       commandLine: |
-        tcpdump -s 0 -n -w /tmp/kieserver.pcap
+        tcpdump -w /projects/vscode.tcpdump
       group:
         kind: run
 
