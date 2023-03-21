@@ -104,6 +104,14 @@ commands:
         oc delete service inventory-quarkus
       group:
         kind: build
+  - id: neverendingcommand
+    exec:
+      label: "8. Tail /dev/null"
+      component: tools
+      commandLine: |
+        tail -f /dev/null
+      group:
+        kind: build
 events:
   postStart:
-    - package
+    - neverendingcommand
