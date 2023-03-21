@@ -27,7 +27,7 @@ components:
       memoryRequest: 5Mi
       memoryLimit: 6G
       cpuRequest: '1'
-      cpuLimit: 4000m
+      cpuLimit: '4'
 commands:
   - id: package
     exec:
