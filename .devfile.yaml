@@ -4,7 +4,10 @@ metadata:
 attributes:
   controller.devfile.io/storage-type: ephemeral
 parent:
-  uri: https://registry.devfile.io/devfiles/java-maven/1.2.0
+#  uri: https://registry.devfile.io/devfiles/java-maven/1.2.0
+  id: nodejs
+  registryUrl: https://registry.devfile.io/
+  version: 2.0.0
 commands:
   - id: buildimage
     exec:
