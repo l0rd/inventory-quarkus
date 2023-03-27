@@ -4,7 +4,7 @@ metadata:
 attributes:
   controller.devfile.io/storage-type: ephemeral
 parent:
-  uri: https://gist.githubusercontent.com/l0rd/e6d0a4967d3652ec687f76c0e3fbfad9/raw/6699ccb1faa816503fdadc3df41d940eb970eb5f/parent-devfile.yaml
+  uri: https://registry.devfile.io/devfiles/java-maven/1.2.0
 commands:
   - id: buildimage
     exec:
