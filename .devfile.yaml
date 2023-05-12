@@ -24,6 +24,46 @@ components:
           protocol: http
           targetPort: 8080
           path: /api/inventory/100000
+        - name: inventory1
+          targetPort: 8081
+        - name: inventory2
+          targetPort: 8082
+        - name: inventory3
+          targetPort: 8083
+        - name: inventory4
+          targetPort: 8084
+        - name: inventory5
+          targetPort: 8085
+        - name: inventory6
+          targetPort: 8086
+        - name: inventory7
+          targetPort: 8087
+        - name: inventory8
+          targetPort: 8088
+        - name: inventory9
+          targetPort: 8089
+        - name: inventory10
+          targetPort: 8090
+        - name: inventory11
+          targetPort: 8091
+        - name: inventory12
+          targetPort: 8092
+        - name: inventory13
+          targetPort: 8093
+        - name: inventory14
+          targetPort: 8094
+        - name: inventory15
+          targetPort: 8095
+        - name: inventory16
+          targetPort: 8096
+        - name: inventory17
+          targetPort: 8097
+        - name: inventory18
+          targetPort: 8098
+        - name: inventory19
+          targetPort: 8099
+        - name: inventory20
+          targetPort: 8000
       memoryRequest: 5Mi
       memoryLimit: 6G
       cpuRequest: 1000m
