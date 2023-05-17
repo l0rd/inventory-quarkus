@@ -3,6 +3,15 @@ metadata:
   name: inventory-quarkus
 attributes:
   controller.devfile.io/storage-type: ephemeral
+projects:
+  - git:
+      remotes:
+        origin: 'https://github.com/l0rd/quarkus-api'
+    name: quarkus-api
+  - git:
+      remotes:
+        origin: 'https://github.com/l0rd/inventory-quarkus'
+    name: inventory-quarkus
 components:
   - name: tools
     container:
