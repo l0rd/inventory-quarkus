@@ -19,7 +19,7 @@ components:
       command:
         - '/bin/sh'
         - '-c'
-        - '{ sed -i ''s/--default-folder ${PROJECT_SOURCE}/--default-folder ${PROJECTS_ROOT}/g'' /checode/entrypoint-volume.sh && /entrypoint.sh }'
+        - '{ sed -i s/PROJECT_SOURCE/PROJECTS_ROOT/g /checode/entrypoint-volume.sh && /entrypoint.sh }'
       env:
         - name: QUARKUS_HTTP_HOST
           value: 0.0.0.0
