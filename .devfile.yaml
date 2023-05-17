@@ -17,12 +17,11 @@ components:
     container:
       image: quay.io/devfile/universal-developer-image:ubi8-latest
       command:
-        - 'sed'
-        - '-i'
-        - "'s/--default-folder ${PROJECT_SOURCE}/--default-folder ${PROJECTS_ROOT}/g'"
-        - '/checode/entrypoint-volume.sh'
+        - '/bin/sh'
+        - '-c'
+        - "sed -i 's/--default-folder ${PROJECT_SOURCE}/--default-folder ${PROJECTS_ROOT}/g' /checode/entrypoint-volume.sh"
         - '&&'
-        - 'entrypoint.sh'
+        - '/entrypoint.sh'
       env:
         - name: QUARKUS_HTTP_HOST
           value: 0.0.0.0
