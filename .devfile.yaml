@@ -17,8 +17,6 @@ components:
     container:
       image: quay.io/devfile/universal-developer-image:ubi8-latest
       command:
-        - '/bin/sh'
-        - '-c'
         - 'sed' 
         - '-i'
         - 's/PROJECT_SOURCE/PROJECTS_ROOT/g'
