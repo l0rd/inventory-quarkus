@@ -24,8 +24,8 @@ components:
           protocol: http
           targetPort: 8080
           path: /api/inventory/100000
-      memoryRequest: 5Mi
-      memoryLimit: 6G
+      memoryRequest: 100Mi
+      memoryLimit: 1G
       cpuRequest: 100m
       cpuLimit: 500m
 commands:
