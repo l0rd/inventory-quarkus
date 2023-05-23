@@ -26,8 +26,8 @@ components:
           path: /api/inventory/100000
       memoryRequest: 5Mi
       memoryLimit: 6G
-      cpuRequest: 1000m
-      cpuLimit: 4000m
+      cpuRequest: 100m
+      cpuLimit: 1000m
 commands:
   - id: package
     exec:
