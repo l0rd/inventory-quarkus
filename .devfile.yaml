@@ -25,9 +25,9 @@ components:
           targetPort: 8080
           path: /api/inventory/100000
       memoryRequest: 100Mi
-      memoryLimit: 1G
+      memoryLimit: 100Mi
       cpuRequest: 100m
-      cpuLimit: 500m
+      cpuLimit: 100m
 commands:
   - id: package
     exec:
