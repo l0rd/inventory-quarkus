@@ -17,6 +17,8 @@ components:
       env:
         - name: QUARKUS_HTTP_HOST
           value: 0.0.0.0
+        - name: HELLO
+          value: world
       endpoints:
         - exposure: none
           name: debug
