@@ -3,6 +3,9 @@ metadata:
   name: inventory-quarkus
 attributes:
   controller.devfile.io/storage-type: ephemeral
+  controller.devfile.io/devworkspace-config:
+    name: custom-dwoc
+    namespace: l0rd-che
 components:
   - name: tools
     container:
