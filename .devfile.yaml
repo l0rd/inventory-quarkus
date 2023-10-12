@@ -5,8 +5,11 @@ attributes:
   controller.devfile.io/storage-type: ephemeral
 starterProjects:
   - name: inventory-quarkus
-    zip:
-      location: https://code.quarkus.io/d?e=io.quarkus%3Aquarkus-resteasy&e=io.quarkus%3Aquarkus-micrometer&e=io.quarkus%3Aquarkus-smallrye-health&e=io.quarkus%3Aquarkus-openshift&cn=devfile
+    git:
+      checkoutFrom:
+        revision: starter-project
+      remotes:
+        origin: https://github.com/l0rd/inventory-quarkus
 components:
   - name: tools
     container:
