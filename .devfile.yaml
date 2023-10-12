@@ -3,6 +3,10 @@ metadata:
   name: inventory-quarkus
 attributes:
   controller.devfile.io/storage-type: ephemeral
+starterProjects:
+  - name: inventory-quarkus
+    zip:
+      location: https://code.quarkus.io/d?e=io.quarkus%3Aquarkus-resteasy&e=io.quarkus%3Aquarkus-micrometer&e=io.quarkus%3Aquarkus-smallrye-health&e=io.quarkus%3Aquarkus-openshift&cn=devfile
 components:
   - name: tools
     container:
