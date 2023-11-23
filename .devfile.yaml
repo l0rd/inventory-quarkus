@@ -1,106 +1,93 @@
 schemaVersion: 2.2.0
 metadata:
-  name: inventory-quarkus
-attributes:
-  controller.devfile.io/storage-type: ephemeral
-components:
-  - name: tools
-    container:
-      image: quay.io/devfile/universal-developer-image:ubi8-latest
-      env:
-        - name: QUARKUS_HTTP_HOST
-          value: 0.0.0.0
-      endpoints:
-        - exposure: none
-          name: debug
-          protocol: tcp
-          targetPort: 5005
-        - exposure: none
-          name: test
-          protocol: http
-          targetPort: 8081
-        - exposure: public
-          name: inventory
-          protocol: http
-          targetPort: 8080
-          path: /api/inventory/100000
-      memoryRequest: 5Mi
-      memoryLimit: 6G
-      cpuRequest: 1000m
-      cpuLimit: 4000m
+  name: frontend-backend-workspace
+  version: 2.2.0
+projects:
+- name: angularui
+  git:
+    remotes:
+      origin: https://github.com/l0rd/che-blog/
+    checkoutFrom:
+      revision: main
+- name: backend
+  git:
+    remotes:
+      origin: https://github.com/l0rd/devworkspace-demo
+    checkoutFrom:
+      revision: main
 commands:
-  - id: package
-    exec:
-      label: "1. Package"
-      component: tools
-      workingDir: ${PROJECTS_ROOT}/inventory-quarkus
-      commandLine: "./mvnw clean package -DskipTests=true"
-      group:
-        kind: build
-        isDefault: true
-  - id: runtests
-    exec:
-      label: "2. Run Tests"
-      component: tools
-      workingDir: ${PROJECTS_ROOT}/inventory-quarkus
-      commandLine: "./mvnw test"
-      group:
-        kind: test
-  - id: startdev
-    exec:
-      label: "3. Start Development mode (Hot reload + debug)"
-      component: tools
-      workingDir: ${PROJECTS_ROOT}/inventory-quarkus
-      commandLine: "./mvnw compile quarkus:dev"
-      group:
-        kind: run
-        isDefault: true
-  - id: buildimage
-    exec:
-      label: "4. Build Image"
-      component: tools
-      workingDir: ${PROJECT_SOURCE}
-      commandLine: |
-        # NAMESPACE=openshift
-        NAMESPACE=$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace)
-        IMAGE=image-registry.openshift-image-registry.svc:5000/${NAMESPACE}/quarkus-api-example
-        podman build -f src/main/docker/Dockerfile.jvm -t "${IMAGE}" .
-      group:
-        kind: build
-  - id: pushimage
-    exec:
-      label: "5. Push Image"
-      component: tools
-      commandLine: |
-        # Requires `oc policy add-role-to-user registry-editor <user_name> -n <namespace>`
-        # NAMESPACE=openshift
-        NAMESPACE=$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace)
-        IMAGE=image-registry.openshift-image-registry.svc:5000/${NAMESPACE}/quarkus-api-example
-        podman login --tls-verify=false -u $(oc whoami) -p $(oc whoami -t) image-registry.openshift-image-registry.svc:5000
-        podman push --tls-verify=false "${IMAGE}"
-      group:
-        kind: build
-  - id: runpod
-    exec:
-      label: "6. Run Pod"
-      component: tools
-      commandLine: |
-        # NAMESPACE=openshift
-        NAMESPACE=$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace)
-        IMAGE=image-registry.openshift-image-registry.svc:5000/${NAMESPACE}/quarkus-api-example
-        oc run inventory-quarkus --image "${IMAGE}" --port 8080
-        oc expose pod/inventory-quarkus
-        echo
-        echo
-        echo "You can now test the application running 'curl -sSL http://inventory-quarkus:8080/api/inventory/100000'"
-      group:
-        kind: build
-  - id: deletepod
-    exec:
-      label: "7. Delete Pod"
-      component: tools
-      commandLine: |
-        oc delete pod inventory-quarkus &&
-        oc delete service inventory-quarkus
-      group:
-        kind: build
+- id: py-cmd-build
+  exec:
+    commandLine: echo "Done by building img component"
+    component: py-ctnr
+    workingDir: /projects/Backend/backend
+- id: py-cmd-run
+  exec:
+    commandLine: chmod 0700 /projects/Backend/backend/boot.sh && /projects/Backend/backend/boot.sh
+    component: py-ctnr
+    workingDir: /projects/Backend/backend
+- id: ng-cmd-build
+  exec:
+    commandLine: npm install && npm install -g @angular/cli
+    component: ng-ctnr
+    workingDir: /projects/AngularUI
+- id: ng-cmd-run
+  exec:
+    commandLine: /projects/AngularUI/set-backend-route-dev.sh && ng build --configuration=development && ng serve --port 8501 --disable-host-check
+    component: ng-ctnr
+    workingDir: /projects/AngularUI
+- id: py-ng-cmd-build
+  composite:
+    commands:
+      - py-cmd-build
+      - ng-cmd-build
+    parallel: false
+    group:
+      kind: build
+      isDefault: true
+- id: py-ng-cmd-run
+  composite:
+    commands:
+      - py-cmd-run
+      - ng-cmd-run
+    parallel: true
+    group:
+      kind: run
+      isDefault: true
+components:
+- name: py-img
+  image:
+    autoBuild: true
+    dockerfile:
+      buildContext: /projects
+      uri: Backend/backend/Dockerfile
+    imageName: quay.io/devfile/universal-developer-image:latest
+- name: ng-ctnr
+  container:
+    args:
+    - tail
+    - -f
+    - /dev/null
+    endpoints:
+    - name: port-8501-tcp
+      protocol: tcp
+      targetPort: 8501
+    image: registry.access.redhat.com/ubi8/nodejs-18:1-71.1698060565
+    memoryLimit: 1024Mi
+    env:
+      - name: DEVSPACE_USERNAME
+        value: ${DEVSPACE_USERNAME}
+      - name: DEVSPACE_WORKSPACE_NAMES
+        value: ${DEVSPACE_WORKSPACE_NAMES}
+- name: py-ctnr
+  container:
+    args:
+    - tail
+    - -f
+    - /dev/null
+    endpoints:
+    - name: port-8502-tcp
+      protocol: tcp
+      targetPort: 8502
+    image: quay.io/devfile/universal-developer-image:latest
+    mountSources: true
