@@ -6,13 +6,13 @@ projects:
 - name: angularui
   git:
     remotes:
-      origin: https://github.com/l0rd/che-blog/
+      origin: https://github.com/l0rd/private-test
     checkoutFrom:
       revision: main
 - name: backend
   git:
     remotes:
-      origin: https://github.com/l0rd/devworkspace-demo
+      origin: https://github.com/l0rd/private-test
     checkoutFrom:
       revision: main
 commands:
