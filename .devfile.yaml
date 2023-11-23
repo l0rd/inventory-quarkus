@@ -73,7 +73,8 @@ components:
       protocol: tcp
       targetPort: 8501
     image: registry.access.redhat.com/ubi8/nodejs-18:1-71.1698060565
-    memoryLimit: 1024Mi
+    memoryLimit: 8Gi
+    cpuLimit: '2'
     env:
       - name: DEVSPACE_USERNAME
         value: ${DEVSPACE_USERNAME}
