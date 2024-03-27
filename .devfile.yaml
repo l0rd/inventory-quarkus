@@ -3,6 +3,7 @@ metadata:
   name: inventory-quarkus
 attributes:
   controller.devfile.io/storage-type: ephemeral
+  pod-overrides: {"spec":{"runtimeClassName":"kata"}}
 components:
   - name: tools
     container:
