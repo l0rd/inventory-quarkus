@@ -3,8 +3,13 @@ metadata:
   name: inventory-quarkus
 attributes:
   controller.devfile.io/storage-type: ephemeral
-  pod-overrides: {"spec":{"runtimeClassName":"kata", "securityContext":{}}}
-  container-overrides: {"securityContext":{}}
+  pod-overrides:
+    {
+      "spec": { "runtimeClassName": "kata" },
+      "metadata":
+        { "annotations": { "io.kubernetes.cri-o.Devices": "/dev/fuse" } },
+    }
+  container-overrides: { "securityContext": {} }
 components:
   - name: tools
     container:
