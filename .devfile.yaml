@@ -13,7 +13,9 @@ attributes:
 components:
   - name: tools
     container:
-      image: quay.io/devfile/universal-developer-image:ubi8-latest
+      image: quay.io/podman/stable
+      command: ["sleep"]
+      args: ["infinity"]
       env:
         - name: QUARKUS_HTTP_HOST
           value: 0.0.0.0
