@@ -9,7 +9,6 @@ attributes:
       "metadata":
         { "annotations": { "io.kubernetes.cri-o.Devices": "/dev/fuse" } },
     }
-  container-overrides: { "securityContext": { "privileged": true } }
 components:
   - name: tools
     container:
