@@ -6,6 +6,8 @@ attributes:
   pod-overrides:
     {
       "spec": { "runtimeClassName": "kata" },
+      "metadata":
+        { "annotations": { "io.kubernetes.cri-o.Devices": "/dev/fuse" } },
     }
 components:
   - name: tools
